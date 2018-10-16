@@ -1,9 +1,16 @@
 from bottle import get, route, post, run, request # or route
+
 from aperter import er_, json_
 
 
 @route('/')
 def root():
+    """default route
+
+    Returns:
+        str: html body for error page
+    """
+
     return '''
         <h1>Wrong Route</h1>
     '''
@@ -24,8 +31,15 @@ def api():
 
 @post('/er')
 def er():
+    """emotion recognition endpoint
+    accepts POST request
+
+    Returns:
+        str: json string of status, data, and message
+    """
+
     try:
-        em=-1
+        em = -1
         url = request.forms.get('url')
         em = er_(url=url)
     except:
